@@ -4,13 +4,13 @@ const prisma = new PrismaClient();
 
 async function main() {
   try {
-    async () => {
-      await prisma.$disconnect();
-    };
+    // your queries will go here later
+    console.log("Prisma client initialized");
   } catch (e) {
     console.error(e);
-    await prisma.$disconnect();
     process.exit(1);
+  } finally {
+    await prisma.$disconnect();
   }
 }
 
