@@ -6,9 +6,26 @@ import GitHub from "next-auth/providers/github";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  providers: [Resend({ from: "onboarding@resend.dev" }), GitHub],
+  providers: [
+    Resend({ from: "onboarding@resend.dev" }),
+    GitHub({
+      clientId: process.env.AUTH_GITHUB_ID!,
+      clientSecret: process.env.AUTH_GITHUB_SECRET!,
+    }),
+  ],
   session: {
     strategy: "jwt",
+  },
+  cookies: {
+    sessionToken: {
+      name: "__Secure-next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production", // ✅ important for Vercel
+      },
+    },
   },
   callbacks: {
     async jwt({ token, user }) {

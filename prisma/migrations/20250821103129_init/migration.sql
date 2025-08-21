@@ -2,7 +2,7 @@
 CREATE TABLE "public"."Blogs" (
     "id" SERIAL NOT NULL,
     "userId" TEXT NOT NULL,
-    "title" VARCHAR(50) NOT NULL,
+    "title" VARCHAR(100) NOT NULL,
     "excerpt" TEXT NOT NULL,
     "author" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
