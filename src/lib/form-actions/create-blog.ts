@@ -34,12 +34,11 @@ export const createBlog = async (formData: FormData) => {
     await prisma.blogs.create({
       data: { userId, title, excerpt, author },
     });
-
-    revalidatePath("/dashboard");
-    redirect("/dashboard");
   } catch (error) {
     console.log("failed to create blog:", error);
   }
+  revalidatePath("/dashboard");
+  return redirect("/dashboard");
 };
 
 export const deleteBlog = async (id: number) => {
@@ -49,6 +48,5 @@ export const deleteBlog = async (id: number) => {
     console.log("An error occurr while deleting blog: ", err);
     throw err;
   }
-  revalidatePath("/blog");
+  revalidatePath("/dashboard");
 };
-

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-export default async function Home() {
+export default async function Page() {
   const session = await auth();
   if (!session?.user.id) {
     notFound();
