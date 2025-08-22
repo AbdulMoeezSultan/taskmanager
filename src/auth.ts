@@ -16,17 +16,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
   },
-  cookies: {
-    sessionToken: {
-      name: "__Secure-next-auth.session-token",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production", // ✅ important for Vercel
-      },
-    },
-  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
